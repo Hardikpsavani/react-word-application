@@ -36,3 +36,5 @@
     transform: rotate(360deg);
   }
 }
+
+li.nav-item { margin: 15px 10px; color: #54585c; }
