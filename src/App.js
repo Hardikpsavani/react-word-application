@@ -5,6 +5,15 @@ function App() {
     const [newText, setNewText] = useState('');
     const [text, setText] = useState('');
 
+    const handleSentenceCase = (event) => {
+        let sentences = text.split('.'); 
+        let result = sentences.map(sentence => {
+            sentence = sentence.trim();
+            return sentence.charAt(0).toUpperCase() + sentence.slice(1);
+        });
+        setNewText(result.join('. '));
+    }
+
     const assignNewText = (event) => {
         setText(event.target.value);
     }
@@ -23,6 +32,10 @@ function App() {
         });
 
         setNewText(newText);
+    }
+
+    const handleRemoveAllSpaces = () => {
+        setNewText(text.replace(/\s+/g, ''));
     }
 
     const handleToItalic = () => {
@@ -45,10 +58,12 @@ function App() {
                         <textarea className="form-control" value={text} id="text" rows="5" onChange={assignNewText}></textarea>
                     </div>
                     <div className="mt-3">                         
-                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3' onClick={handleToLowercase}>To lowercase</button>
-                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3' onClick={handleToUppercase}>To UPPERCASE</button>
-                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3' onClick={handleToCapitalise}>To Capitalise</button>
-                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3' onClick={handleToItalic}>To <i>Italic</i></button>
+                    <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleSentenceCase}>Sentence Case</button>
+                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleToLowercase}>To lowercase</button>
+                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleToUppercase}>To UPPERCASE</button>
+                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleToCapitalise}>To Capitalise</button>
+                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleRemoveAllSpaces}>Remove All Spaces</button>
+                        <button disabled={text.length===0} type="button" className='btn btn-secondary me-3 my-2' onClick={handleToItalic}>To <i>Italic</i></button>
                     </div>
                     </form>
                 </div>

@@ -1,5 +1,18 @@
+import { useState } from 'react';
 
 function Header() {
+    const [search, setSearch] = useState('');
+
+    const handleInputChange = (event) => {
+        setSearch(event.target.value);
+    };
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(search)}`;
+        window.open(searchUrl, '_blank');
+    };
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -14,8 +27,9 @@ function Header() {
                         <li className="nav-item"><a className="nav-link" href="/home">Partner</a></li>
                         <li className="nav-item"><a className="nav-link" href="/home">Contact Us</a></li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <form className="d-flex" role="search" onSubmit={handleSearch}>
+                        <input className="form-control me-2" type="text" placeholder="Search" value={search} onChange={handleInputChange}
+                            aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
